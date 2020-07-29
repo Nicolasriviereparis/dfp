@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
     <title>Webslesson Tutorial | Search HTML Table Data by using JQuery</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link
@@ -19,6 +19,7 @@
         border-radius: 50px;
         padding:2px 6px;
         margin-right:10px;
+        margin-left: -10px;
         transform: translateY(-2px);
       }
       #result {
@@ -47,11 +48,14 @@
       .deprecated .val_fullname{
         display:none;
       }
+      .card-body {
+        padding: 4vmin;
+      }
     </style>
   </head>
-  <body class="pt-0 pt-lg-5 bg-light">
-    <div class="container mt-0 mt-lg-5">
-      <div class="row">
+  <body class="bg-light">
+    <div class="container mt-3 mt-lg-5">
+      <div class="row d-flex">
         <div class="col-12">
           <input
             type="text"
@@ -60,6 +64,9 @@
             placeholder="Search Employee Details"
             class="form-control"
           />
+        </div>
+        <div class="col-12 text-center pt-2 small text-dark">
+          <div id="count"><span class="mt-5 pt-5"> <br /></span><br /><b>Utilisez le champ de recherche en haut de cette page pour parcourir le Larouse PRO BTP.</b><br />En cas de besoin, une aide est disponible en bas à droite. Pour toute demande d’évolution ou d’ajout de notion, cliquez sur le bouton “contact” en bas à droite</div>
         </div>
         <div class="col-12">
           <div id="result"></div>
@@ -177,7 +184,7 @@
 
 
   $(document).ready(function () {
-    $.ajaxSetup({ cache: false });
+    // $.ajaxSetup({ cache: false });
     $('#search').keyup(function () {
       $('#result').html('');
       $('#state').val('');
@@ -192,7 +199,7 @@
               defTotalCount++;
             });
 
-            var cardHTML = `<div class="card mt-2 bg-white"><div class="card-body"><h4 class="card-title">${value.name}</h4>`;
+            var cardHTML = `<div class="card mt-2 bg-white"><div class="card-body"><h4 class="card-title h5"><b>${value.name}</b></h4>`;
             var defCount = 1;
             $.each(value.defs, function (i, val) {
               if (defTotalCount == 1) {
@@ -207,10 +214,13 @@
                 disable = '';
                 see = '';
               }
+              if (defCount > 1){
+                cardHTML += `<hr />`;
+              }
               cardHTML += `
               <div class="mt-2 ${disable}">
-                <h5 class="card-text val_fullname text-success">${defCountHTML}${val.fullname}</h5>
-                <h6 class="card-subtitle mb-2 text-muted val_type">${val.type}</h6>
+                <h5 class="ch6 ard-text val_fullname text-success">${defCountHTML}${val.fullname}</h5>
+                <h6 class="card-subtitle mb-2 text-muted val_type small">${val.type}</h6>
                 <p class="card-text val_desc">${val.description}<span class="card-text val_see"> > Voir ${see}</span></p>
                 <div class="more">
                   <a href="#" class="card-link">Card link</a>
@@ -223,6 +233,17 @@
             $('#result').append(cardHTML);
           };
         });
+        var totalResult = $('.card').length;
+
+       if (totalResult == 0 && searchField == ''){
+          $('#count').html('<span class="mt-5 pt-5"> <br /></span><br /><b>Utilisez le champ de recherche en haut de cette page pour parcourir le Larouse PRO BTP.</b><br />En cas de besoin, une aide est disponible en bas à droite. Pour toute demande d’évolution ou d’ajout de notion, cliquez sur le bouton “contact” en bas à droite');
+       }else if(totalResult == 0 && searchField != ''){
+          $('#count').html('<span class="display-4">:(</span><br /><br />Aucun résultat...');
+        }else if (totalResult == 1) {
+          $('#count').html(totalResult + ' résultat');
+        }else{
+          $('#count').html(totalResult + ' résultats');
+        }
     });
 
     $('#result').on('click', 'li', function () {
