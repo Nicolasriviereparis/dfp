@@ -95,6 +95,11 @@ $(document).ready(function () {
         $('#search').keyup(mainSearch());
       });
     };
+
+    $(window).scroll(function (event) {
+      $('#search').blur();
+      // console.warn('#search is blured');
+  });
   
   });
   
