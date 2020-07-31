@@ -6,7 +6,7 @@ $(document).ready(function () {
       $('#result').html('');
       const expression = new RegExp(searchField.val(), 'i');
       // console.log(expression);
-      $.getJSON("../data/data.json", function(data){
+      $.getJSON("data.json", function(data){
       $.each(data, function (key, value) {
         const node = value.node;
         if (searchField.val() != '' && node.title.search(expression) != -1) {
