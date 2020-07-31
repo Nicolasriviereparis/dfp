@@ -3,54 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no">
-    <title>Webslesson Tutorial | Search HTML Table Data by using JQuery</title>
+    <title>PRO BTP Dico</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css"
-    />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-      .defcount{
-        display: inline-block;
-        font-size: .8rem;
-        color:#ababab;
-        background-color:rgb(232, 232, 232);
-        border-radius: 50px;
-        padding:2px 6px;
-        margin-right:10px;
-        margin-left: -10px;
-        transform: translateY(-2px);
-      }
-      #result {
-        position: absolute;
-        margin-top: 10px;
-        z-index: 1001;
-        width:calc(100% - 30px);
-      }
-      .link-class:hover {
-        background-color: #f1f1f1;
-      }
-      .val_see,
-      .more{
-        display: none;
-      }
-      .deprecated *{
-        opacity:.3;
-      }
-      .deprecated .val_desc,
-      .deprecated .val_see{
-        opacity:.9;
-        display: inline;
-      }
-      .deprecated .more,
-      .deprecated .val_type,
-      .deprecated .val_fullname{
-        display:none;
-      }
-      .card-body {
-        padding: 4vmin;
-      }
+      *,*::before,*::after{box-sizing:border-box;}body{margin:0;font-family:var(--bs-font-sans-serif);font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);}b{font-weight:bolder;}.small{font-size:0.875em;}input{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;overflow:visible;}::-moz-focus-inner{padding:0;border-style:none;}.container{width:100%;padding-right:1rem;padding-left:1rem;margin-right:auto;margin-left:auto;}@media (min-width: 576px){.container{max-width:540px;}}@media (min-width: 768px){.container{max-width:720px;}}@media (min-width: 992px){.container{max-width:960px;}.mt-lg-5{margin-top:3rem!important;}}@media (min-width: 1200px){.container{max-width:1140px;}}@media (min-width: 1400px){.container{max-width:1320px;}}.row{--bs-gutter-x:1.5rem;--bs-gutter-y:0;display:flex;flex:1 0 100%;flex-wrap:wrap;margin-top:calc(var(--bs-gutter-y) * -1);margin-right:calc(var(--bs-gutter-x) / -2);margin-left:calc(var(--bs-gutter-x) / -2);}.row > *{flex-shrink:0;width:100%;max-width:100%;padding-right:calc(var(--bs-gutter-x) / 2);padding-left:calc(var(--bs-gutter-x) / 2);margin-top:var(--bs-gutter-y);}.col-12{flex:0 0 auto;width:100%;}.form-control{display:block;width:100%;min-height:calc(1.5em + 0.75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;appearance:none;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;}@media (prefers-reduced-motion: reduce){.form-control{transition:none;}}.form-control:focus{color:#495057;background-color:#fff;border-color:#8bbafe;outline:0;box-shadow:0 0 0 .2rem rgba(13,110,253,.25);}.form-control::placeholder{color:#6c757d;opacity:1;}.form-control:disabled{background-color:#e9ecef;opacity:1;}.d-flex{display:flex!important;}.mt-3{margin-top:1rem!important;}.py-2{padding-top:.5rem!important;padding-bottom:.5rem!important;}.text-center{text-align:center!important;}.text-dark{color:#343a40!important;}.bg-light{background-color:#f8f9fa!important;}
     </style>
   </head>
   <body class="bg-light">
@@ -65,191 +21,25 @@
             class="form-control"
           />
         </div>
-        <div class="col-12 text-center pt-2 small text-dark">
-          <div id="count"><span class="mt-5 pt-5"> <br /></span><br /><b>Utilisez le champ de recherche en haut de cette page pour parcourir le Larouse PRO BTP.</b><br />En cas de besoin, une aide est disponible en bas à droite. Pour toute demande d’évolution ou d’ajout de notion, cliquez sur le bouton “contact” en bas à droite</div>
+        <div class="col-12 text-center py-2 small text-dark">
+          <div id="count"><span class="mt-5 pt-5"> <br /></span><br /><b>Commencez à taper votre recherche dans le champ ci-dessus pour parcourir le Larouse PRO BTP !</b><br />Pour toute demande d’évolution ou d’ajout de notion, cliquez sur le bouton “contact” en bas à droite.</div>
         </div>
-        <div class="col-12">
-          <div id="result"></div>
-        </div>
+
+          <div id="result" class="col-12"></div>
+
       </div>
     </div>
   </body>
+  <!-- <link
+      rel="stylesheet"
+      href="/css/styles.css"
+    /> -->
+  <link
+      rel="stylesheet"
+      href="css/bootstrap.css"
+    />
 
 <html>
 
-<script>
-  var data =[
-  {
-    "id": 1,
-    "name": "CA",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "fullname": "Conseiller Artisan",
-        "description": "Définition d'un CA...",
-        "type": "poste",
-        "statu": "cadre"
-      }
-    }
-  },
-  {
-    "id": 2,
-    "name": "DD",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "fullname": "Délégué départemental",
-        "description": "Définition d'un DD...",
-        "type": "poste",
-        "statu": "cadre",
-        "relation": {
-          "posts": [1],
-          "direction": [3, 11]
-        }
-      }
-    }
-  },
-  {
-    "id": 3,
-    "name": "DR",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "fullname": "Direction Régionale",
-        "description": "Définition d'une Direction Régionale... Il en existe 9, classée par ordre alphabétique des villes.",
-        "type": "direction"
-      },
-      "2": {
-        "fullname": "Directeur Régionale",
-        "description": "Définition d'un Directeur Régionale...",
-        "type": "poste",
-        "statu": "cadre"
-      }
-    }
-  },
-  {
-    "id": 5,
-    "name": "DDTC",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "fullname": "Direction Développement des Talents et des Compétences",
-        "oldName": "Direction de la Formation Professionnelle (DFP)",
-        "description": "Aucune définitionn pour DDTC",
-        "type": "direction",
-        "location": {
-          "ville": "Vincennes",
-          "adress": "7 square félix nadar",
-          "cp": "93340",
-          "etage": 2
-        },
-        "contact": {
-          "tel": "0123456789",
-          "mail": "mail@probtp.com"
-        }
-      }
-    }
-  },
-  {
-    "id": 8,
-    "name": "DFP",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "deprecated": true,
-        "fullname": "Direction de la Formation Professionnelle",
-        "description": "ancien nom de la DDTC",
-        "type": "direction",
-        "see": 5
-      }
-    }
-  },
-  {
-    "id": 6,
-    "name": "RSE",
-    "keywords":"",
-    "defs": {
-      "1": {
-        "fullname": "Réseau Social d'Entreprise",
-        "description": "Réseau interne",
-        "type": "outil"
-      },
-      "2": {
-        "fullname": "Responsabilité sociétale de l'entreprise",
-        "description": "Projet de développement",
-        "type": "produit et service"
-      }
-    }
-  }];
+<script type="text/javascript" src="js/search.js"></script>
 
-
-  $(document).ready(function () {
-    // $.ajaxSetup({ cache: false });
-    $('#search').keyup(function () {
-      $('#result').html('');
-      $('#state').val('');
-      var searchField = $('#search').val();
-      var expression = new RegExp(searchField, 'i');
-        // console.log(data);
-        $.each(data, function (key, value) {
-          
-          if (searchField != '' && value.name.search(expression) != -1) {
-            var defTotalCount = 0;
-            $.each(value.defs, function (i, val) {
-              defTotalCount++;
-            });
-
-            var cardHTML = `<div class="card mt-2 bg-white"><div class="card-body"><h4 class="card-title h5"><b>${value.name}</b></h4>`;
-            var defCount = 1;
-            $.each(value.defs, function (i, val) {
-              if (defTotalCount == 1) {
-                defCountHTML = ``;
-              }else{
-                defCountHTML = `<span class="defcount bg-light ">${defCount}</span>`;
-              }
-              if(val.deprecated){
-                var disable = 'deprecated';
-                var see = data.find(value => value.id === val.see).name;
-              }else{
-                disable = '';
-                see = '';
-              }
-              if (defCount > 1){
-                cardHTML += `<hr />`;
-              }
-              cardHTML += `
-              <div class="mt-2 ${disable}">
-                <h5 class="ch6 ard-text val_fullname text-success">${defCountHTML}${val.fullname}</h5>
-                <h6 class="card-subtitle mb-2 text-muted val_type small">${val.type}</h6>
-                <p class="card-text val_desc">${val.description}<span class="card-text val_see"> > Voir ${see}</span></p>
-                <div class="more">
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>`;
-              defCount++;
-            });
-            cardHTML += `</div></div>`;
-            $('#result').append(cardHTML);
-          };
-        });
-        var totalResult = $('.card').length;
-
-       if (totalResult == 0 && searchField == ''){
-          $('#count').html('<span class="mt-5 pt-5"> <br /></span><br /><b>Utilisez le champ de recherche en haut de cette page pour parcourir le Larouse PRO BTP.</b><br />En cas de besoin, une aide est disponible en bas à droite. Pour toute demande d’évolution ou d’ajout de notion, cliquez sur le bouton “contact” en bas à droite');
-       }else if(totalResult == 0 && searchField != ''){
-          $('#count').html('<span class="display-4">:(</span><br /><br />Aucun résultat...');
-        }else if (totalResult == 1) {
-          $('#count').html(totalResult + ' résultat');
-        }else{
-          $('#count').html(totalResult + ' résultats');
-        }
-    });
-
-    $('#result').on('click', 'li', function () {
-      var click_text = $(this).text().split('|');
-      $('#search').val($.trim(click_text[0]));
-      $('#result').html('');
-    });
-  });
-</script>

@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "name": "CA",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "fullname": "Conseiller Artisan",
+        "description": "Définition d'un CA...",
+        "type": "poste",
+        "statu": "cadre"
+      }
+    }
+  },
+  {
+    "id": 2,
+    "name": "DD",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "fullname": "Délégué départemental",
+        "description": "Définition d'un DD...",
+        "type": "poste",
+        "statu": "cadre",
+        "relation": {
+          "posts": [1],
+          "direction": [3, 11]
+        }
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "DR",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "fullname": "Direction Régionale",
+        "description": "Définition d'une Direction Régionale... Il en existe 9, classée par ordre alphabétique des villes.",
+        "type": "direction"
+      },
+      "2": {
+        "fullname": "Directeur Régionale",
+        "description": "Définition d'un Directeur Régionale...",
+        "type": "poste",
+        "statu": "cadre"
+      }
+    }
+  },
+  {
+    "id": 5,
+    "name": "DDTC",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "fullname": "Direction Développement des Talents et des Compétences",
+        "oldName": "Direction de la Formation Professionnelle (DFP)",
+        "description": "Aucune définitionn pour DDTC",
+        "type": "direction",
+        "location": {
+          "ville": "Vincennes",
+          "adress": "7 square félix nadar",
+          "cp": "93340",
+          "etage": 2
+        },
+        "contact": {
+          "tel": "0123456789",
+          "mail": "mail@probtp.com"
+        }
+      }
+    }
+  },
+  {
+    "id": 8,
+    "name": "DFP",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "deprecated": true,
+        "fullname": "Direction de la Formation Professionnelle",
+        "description": "ancien nom de la DDTC",
+        "type": "direction",
+        "see": 5
+      }
+    }
+  },
+  {
+    "id": 6,
+    "name": "RSE",
+    "keywords":"",
+    "defs": {
+      "1": {
+        "fullname": "Réseau Social d'Entreprise",
+        "description": "Réseau interne",
+        "type": "outil"
+      },
+      "2": {
+        "fullname": "Responsabilité sociétale de l'entreprise",
+        "description": "Projet de développement",
+        "type": "produit et service"
+      }
+    }
+  }
+]
