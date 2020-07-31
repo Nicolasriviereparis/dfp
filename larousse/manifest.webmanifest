@@ -8,17 +8,17 @@
     "orientation": "portrait",
     "icons": [
       {
-        "src": "icon/PBDico-48.png",
+        "src": "icon/icon-48.png",
         "type": "image/png",
         "sizes": "48x48"
       },
       {
-        "src": "icon/PBDico-96.png",
+        "src": "icon/icon-96.png",
         "type": "image/png",
         "sizes": "96x96"
       },
       {
-        "src": "icon/PBDico-192.png",
+        "src": "icon/icon-192.png",
         "type": "image/png",
         "sizes": "192x192"
       }
