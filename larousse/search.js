@@ -1,8 +1,18 @@
 $(document).ready(function () {
-    $('#search').keyup(mainSearch);
-    const searchField = $('#search');
+  //setup before functions
+  const typingTimer;                //timer identifier
+  const doneTypingInterval = 5000;  //time in ms, 5 second for example
+  // const $input = $('#myInput');
+
+  const searchField = $('#search');
+
+  searchField.keyup(mainSearch);
   
     function mainSearch() {
+      // Start countdown
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(doneTyping, doneTypingInterval);
+
       $('#result').html('');
       const expression = new RegExp(searchField.val(), 'i');
       // console.log(expression);
@@ -100,6 +110,21 @@ $(document).ready(function () {
       $('#search').blur();
       // console.warn('#search is blured');
   });
-  
+
+  // //on keyup, start the countdown
+  // searchField.on('keyup', function () {
+    
+  // });
+
+  //on keydown, clear the countdown 
+  searchField.on('keydown', function () {
+    clearTimeout(typingTimer);
   });
-  
+
+  //user is "finished typing," do something
+  function doneTyping () {
+    $('#search').blur();
+  }
+
+
+  });
