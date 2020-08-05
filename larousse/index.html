@@ -7,200 +7,107 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
     />
     <title>PRO BTP Dico</title>
-    <link rel="manifest" href="manifest.webmanifest">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: var(--bs-font-sans-serif);
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #212529;
-        background-color: #fff;
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      }
-      b {
-        font-weight: bolder;
-      }
-      .small {
-        font-size: 0.875em;
-      }
-      input {
-        margin: 0;
-        font-family: inherit;
-        font-size: inherit;
-        line-height: inherit;
-        overflow: visible;
-      }
-      ::-moz-focus-inner {
-        padding: 0;
-        border-style: none;
-      }
-      .container {
-        width: 100%;
-        padding-right: 1rem;
-        padding-left: 1rem;
-        margin-right: auto;
-        margin-left: auto;
-      }
-      @media (min-width: 576px) {
-        .container {
-          max-width: 540px;
-        }
-      }
-      @media (min-width: 768px) {
-        .container {
-          max-width: 720px;
-        }
-      }
-      @media (min-width: 992px) {
-        .container {
-          max-width: 960px;
-        }
-        .mt-lg-5 {
-          margin-top: 3rem !important;
-        }
-      }
-      @media (min-width: 1200px) {
-        .container {
-          max-width: 1140px;
-        }
-      }
-      @media (min-width: 1400px) {
-        .container {
-          max-width: 1320px;
-        }
-      }
-      .row {
-        --bs-gutter-x: 1.5rem;
-        --bs-gutter-y: 0;
-        display: flex;
-        flex: 1 0 100%;
-        flex-wrap: wrap;
-        margin-top: calc(var(--bs-gutter-y) * -1);
-        margin-right: calc(var(--bs-gutter-x) / -2);
-        margin-left: calc(var(--bs-gutter-x) / -2);
-      }
-      .row > * {
-        flex-shrink: 0;
-        width: 100%;
-        max-width: 100%;
-        padding-right: calc(var(--bs-gutter-x) / 2);
-        padding-left: calc(var(--bs-gutter-x) / 2);
-        margin-top: var(--bs-gutter-y);
-      }
-      .col-12 {
-        flex: 0 0 auto;
-        width: 100%;
-      }
-      .form-control {
-        display: block;
-        width: 100%;
-        min-height: calc(1.5em + 0.75rem + 2px);
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        appearance: none;
-        border-radius: 0.25rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .form-control {
-          transition: none;
-        }
-      }
-      .form-control:focus {
-        color: #495057;
-        background-color: #fff;
-        border-color: #8bbafe;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-      }
-      .form-control::placeholder {
-        color: #6c757d;
-        opacity: 1;
-      }
-      .form-control:disabled {
-        background-color: #e9ecef;
-        opacity: 1;
-      }
-      .d-flex {
-        display: flex !important;
-      }
-      .mt-3 {
-        margin-top: 1rem !important;
-      }
-      .py-2 {
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
-      }
-      .text-center {
-        text-align: center !important;
-      }
-      .text-dark {
-        color: #343a40 !important;
-      }
-      .bg-light {
-        background-color: #f8f9fa !important;
-      }
-    </style>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script
+      crossorigin="anonymous"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"
+    ></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/critical.css" />
   </head>
-  <body class="bg-light">
-    <div class="container mt-3 mt-lg-5">
+  <body class="bg-light" id="body">
+    <div class="fixed-top">
+      <div id="offline-alert" class="bg-danger text-white small text-center px-2">
+        Vous etes hors réseau. L'application peut recontrer des problème de chargement.
+      </div>
+    <div class="container pt-1 pb-1 bg-light" id="header" style="z-index:3000">
       <div class="row d-flex">
-        <div class="col-12">
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search Employee Details"
-            class="form-control"
-          />
-        </div>
-        <div class="col-12 text-center py-2 small text-dark">
+        <div class="col-12 text-center py-3">
+          <form>
+            <div class="row d-flex g-0">
+              <div class="col-10 col-md-11 text-dark">
+                <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Que cherchez-vous ?"
+                class="form-control small"
+                style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+              />
+              </div>
+              <div class="col-2 col-md-1">
+                <button type="button" class="btn btn-dark btn-block text-center px-0" aria-label="Close" id="reset" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+          </form>
           <div id="count">
-            <span class="mt-5 pt-5"> <br /></span><br /><b
+            <span class="mt-5 pt-2"> <br /></span><br /><b
               >Commencez à taper votre recherche dans le champ ci-dessus pour
               parcourir le Larouse PRO BTP !</b
             ><br />Pour toute demande d’évolution ou d’ajout de notion, cliquez
             sur le bouton “contact” en bas à droite.
           </div>
         </div>
-
-        <div id="result" class="col-12"></div>
       </div>
+    </div>
+  </div>
+
+    <div class="container mt-5 pt-5 focus" id="result-container">
+      <div class="row d-flex mt-5">
+        <div class="col-12">
+          <div id="result" class="col-12"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid position-absolute" style="top: 12vh;">
+      <div class="container rounded">
+        <div class="row">
+          <div class="col-12 bg-white right" id="more-container"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Install Modal -->
+    <div class="modal fade" id="installPromptModal" tabindex="-1" role="dialog" aria-labelledby="installPromptModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3>Installez l'application</h3>
+            <p>Pour accédez à toutes les infos PRO BTP dans toutes les conditions, installez l'application PRO BTP Dico !</p>
+            <div class="d-flex justify-content-between mt-5">
+              <button type="button" class="btn btn-outline-secondary mr-auto" data-dismiss="modal">Fermer</button>
+              <button class="btn btn-primary ml-auto text-center" id="install-btn">Istaller l'app</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-bottom">
+      <!-- <button class="btn btn-primary btn-block text-center" id="install-btn">Istaller l'app</button> -->
     </div>
   </body>
   <!-- <link
       rel="stylesheet"
-      href="/css/styles.css"
+      href="css/styles.css"
     /> -->
-  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
 
   <html>
-    <script type="text/javascript" src="search.js"></script>
-    <script>
-      // Check that service workers are supported
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/getdata-dev.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="sw-registration.js"></script>
+    <!-- <script>
+      import { Workbox } from 'https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-window.prod.mjs';
+
       if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js', {
-            scope: './',
-          });
+        const wb = new Workbox('sw.js');
+
+        wb.register({
+          scope: './',
         });
       }
-    </script>
+    </script> -->
   </html>
 </html>

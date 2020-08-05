@@ -1,27 +1,65 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js'
+);
 
-// This will trigger the importScripts() for workbox.strategies and its dependencies:
-const {strategies} = workbox;
+workbox.setConfig({
+  debug: false,
+});
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.url.endsWith('.css')) {
-    // Using the previously-initialized strategies will work as expected.
-    const cacheFirst = new strategies.CacheFirst();
-    event.respondWith(cacheFirst.handle({request: event.request}));
-  }
-  if (event.request.url.endsWith('.js')) {
-    // Using the previously-initialized strategies will work as expected.
-    const cacheFirst = new strategies.CacheFirst();
-    event.respondWith(cacheFirst.handle({request: event.request}));
-  }
-  if (event.request.url.endsWith('.html')) {
-    // Using the previously-initialized strategies will work as expected.
-    const cacheFirst = new strategies.CacheFirst();
-    event.respondWith(cacheFirst.handle({request: event.request}));
-  }
-  if (event.request.url.endsWith('.json')) {
-    // Using the previously-initialized strategies will work as expected.
-    const cacheFirst = new strategies.CacheFirst();
-    event.respondWith(cacheFirst.handle({request: event.request}));
-  }
+const { registerRoute } = workbox.routing;
+// const {StaleWhileRevalidate} = workbox.strategies;
+// const {NetworkFirst} = workbox.strategies;
+const { CacheFirst } = workbox.strategies;
+const { NetworkOnly } = workbox.strategies;
+// const {CacheOnly} = workbox.strategies;
+const { CacheableResponse } = workbox.cacheableResponse;
+const { precacheAndRoute } = workbox.precaching;
+const { setCacheNameDetails } = workbox.core;
+
+setCacheNameDetails({
+  prefix: 'pbDico',
+  suffix: 'v1',
+  precache: 'precache',
+  runtime: 'app',
+  googleAnalytics: 'ga',
+});
+
+precacheAndRoute([
+  { url: 'manifest.webmanifest', revision: null },
+  { url: 'index.html', revision: null },
+  { url: 'css/bootstrap/bootstrap.min.css', revision: null },
+  { url: 'css/critical.css', revision: null },
+  { url: 'js/bootstrap/bootstrap.min.js', revision: null },
+  { url: 'js/app.js', revision: null },
+  { url: 'js/getdata-dev.js', revision: null },
+  { url: 'js/search.js', revision: null },
+  { url: 'sw-registration.js', revision: null },
+  { url: 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js', revision: null },
+]);
+
+
+
+const manifestHandler = new CacheFirst();
+const docHandler = new CacheFirst();
+const cssHandler = new CacheFirst();
+const jsHandler = new CacheFirst();
+const jsonHandler = new CacheFirst();
+
+registerRoute(new RegExp('.+\\.webmanifest'), manifestHandler);
+
+registerRoute(new RegExp('.+\\.css$'), docHandler);
+
+registerRoute(new RegExp('.+\\.css$'), cssHandler);
+
+registerRoute(new RegExp('.+\\.js$'), jsHandler);
+
+registerRoute(new RegExp('.+\\.json$'), jsonHandler);
+
+// handling json fetch event
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      return response || fetch(event.request);
+    })
+  );
 });
