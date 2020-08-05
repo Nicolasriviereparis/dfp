@@ -17,55 +17,66 @@
     <link rel="stylesheet" href="css/critical.css" />
   </head>
   <body class="bg-light" id="body">
-    <div class="fixed-top">
-      <div id="offline-alert" class="bg-danger text-white small text-center px-2">
-        Vous etes hors réseau. L'application peut recontrer des problème de chargement.
-      </div>
-    <div class="container pt-1 pb-1 bg-light" id="header" style="z-index:3000">
-      <div class="row d-flex">
-        <div class="col-12 text-center py-3">
-          <form>
-            <div class="row d-flex g-0">
-              <div class="col-10 col-md-11 text-dark pr-0">
-                <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Que cherchez-vous ?"
-                class="form-control small"
-                style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
-              />
-              </div>
-              <div class="col-2 col-md-1 pl-0">
-                <button type="button" class="btn btn-dark btn-block text-center px-0" aria-label="Close" id="reset" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+
+
+
+
+
+
+
+    
+    <div class="sticky-top bg-light" id="header-container">
+  <div class="container pt-1 pb-1 bg-light" id="header" style="z-index:3000">
+    <div id="offline-alert" class="bg-danger text-white small text-center px-2 fixed-top">
+      Hors connexion.
+    </div>
+    <div class="row d-flex">
+      <div class="col-12 text-center py-3">
+        <form>
+          <div class="row d-flex g-0">
+            <div class="col-10 col-md-11 text-dark pr-0">
+              <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Que cherchez-vous ?"
+              class="form-control small"
+              style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+            />
             </div>
-          </form>
-          <div id="count">
-            <span class="mt-5 pt-2"> <br /></span><br /><b
-              >Commencez à taper votre recherche dans le champ ci-dessus pour
-              parcourir le Larouse PRO BTP !</b
-            ><br />Pour toute demande d’évolution ou d’ajout de notion, cliquez
-            sur le bouton “contact” en bas à droite.
+            <div class="col-2 col-md-1 pl-0">
+              <button type="button" class="btn btn-dark btn-block text-center px-0" aria-label="Close" id="reset" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           </div>
+        </form>
+        <div id="count">
+          <span class="mt-5 pt-2"> <br /></span><br /><b
+            >Commencez à taper votre recherche dans le champ ci-dessus pour
+            parcourir le Larouse PRO BTP !</b
+          ><br />Pour toute demande d’évolution ou d’ajout de notion, cliquez
+          sur le bouton “contact” en bas à droite.
         </div>
       </div>
     </div>
   </div>
+</div>
 
-    <div class="container mt-5 pt-5 focus px-0" id="result-container">
+
+
+
+    <div class="container mb-5 focus" id="result-container">
       <div class="row d-flex mt-5">
         <div class="col-12">
-          <div id="result" class="col-12"></div>
+          <div id="result" class="col-12 px-0"></div>
         </div>
       </div>
     </div>
     <div class="container-fluid position-absolute" style="top: 12vh;">
       <div class="container rounded">
         <div class="row">
-          <div class="col-12 bg-white right" id="more-container"></div>
+          <div class="col-12 bg-white right" id="more-container" style="overflow-x: hidden;"></div>
         </div>
       </div>
     </div>
@@ -89,10 +100,10 @@
     </div>
   </body>
   <link rel="stylesheet" href="css/styles.css"/>
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
 
   <html>
-    <script type="text/javascript" src="js/search.min.js"></script>
+    <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/getdata-dev.js"></script>
     <script type="module" src="js/app.js"></script>
     <script>
