@@ -1,61 +1,54 @@
-function docReady(fn) {
-  // see if DOM is already available
-  if (
-    document.readyState === 'complete' ||
-    document.readyState === 'interactive'
-  ) {
-    // call on next available tick
-    setTimeout(fn, 1);
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
+function changeHandler(e) { 
+  let speed = navigator.connection.downlink;
+  let body = document.querySelector('#body');
+  let alert = document.querySelector('#offline-alert');
+   if (speed >= 0.1 && speed < .5) {
+    console.log(speed);
+    body.classList.add('bad-network');
+    body.classList.remove('offline');
+    alert.innerHTML = 'Mauvaise connexion...';
+
+  } else if (speed < 0.1) {
+    console.log(speed);
+    body.classList.remove('bad-network');
+    body.classList.add('offline');
+    alert.innerHTML = 'Hors connexion.';
+  }else{
+    console.log(speed);
+    body.classList.remove('bad-network');
+    body.classList.remove('offline');
+    alert.innerHTML = '';
   }
 }
-
-function handleNetworkChange(event) {
-  if (navigator.onLine) {
-    document.querySelector('#body').classList.remove('offline');
-  } else {
-    document.querySelector('#body').classList.add('offline');
-  }
-}
+navigator.connection.onchange = changeHandler; 
 
 
-window.addEventListener('load', () => {
-  window.addEventListener('online', handleNetworkChange);
-  window.addEventListener('offline', handleNetworkChange);
-});
-
-docReady(handleNetworkChange);
-
-
-
-
-
+// Prompt install PWA
 let deferredPrompt;
-
 window.addEventListener('beforeinstallprompt', (e) => {
   // Prevent the mini-infobar from appearing on mobile
   e.preventDefault();
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
-  // Update UI notify the user they can install the PWA
-  $('#installPromptModal').modal('show');
 });
+
+document.querySelector('.btn-close').addEventListener('click', () =>{
+  $('#installPromptModal').addClass('hidden');
+});
+document.querySelector('#installPromptModal').addEventListener('click', () =>{
+  $('#installPromptModal').addClass('hidden');
+})
 
 let buttonInstall = document.querySelector('#install-btn');
 
 buttonInstall.addEventListener('click', (e) => {
   // Hide the app provided install promotion
   // hideMyInstallPromotion();
-  // Show the install prompt
   deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
   deferredPrompt.userChoice.then((choiceResult) => {
     // if (choiceResult.outcome === 'accepted') {
-    //   console.log('User accepted the install prompt');
     // } else {
-    //   console.log('User dismissed the install prompt');
     // }
-    $('#installPromptModal').modal('hide');
+    $('#installPromptModal').addClass('hidden');
   });
 });

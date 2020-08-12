@@ -5,6 +5,7 @@ const searchField = $('#search');
 function showResult() {
   searchField.keyup(mainSearch);
   function mainSearch() {
+    $(document).scrollTop(0);
     resetContainerClass();
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
@@ -16,54 +17,51 @@ function showResult() {
         $.each(node.defs.items, function (i, def) {
           defTotalCount++;
         });
-        var cardHTML = `<div class="card mb-2 bg-white" id="${node.databaseId}"><div class="card-body"><h4 class="card-title h5 text-primary"><b>${node.title}</b></h4>`;
+        var cardHTML = `<div class="card" id="${node.databaseId}"><div class="card-header"><h1 class="card-title">${node.title}</h1></div>`;
         var defCount = 1;
         $.each(node.defs.items, function (i, def) {
           if (defTotalCount == 1) {
-            defCountHTML = ``;
+            defCountHTML = `<div class="def-count-container def-count-hidden"><div class="def-count def-count-hidden">${defCount}</div><div class="small light def-type"> &nbsp;${def.type}</div></div>`;
           } else {
-            defCountHTML = `<span class="defcount bg-light">${defCount}</span>`;
+            defCountHTML = `<div class="def-count-container"><div class="def-count">${defCount}</div><div class="small light def-type"> &nbsp;${def.type}</div></div>`;
           }
-          var disable = null;
+          var disable = '';
           var disableSpan = '';
           var seeHTML = '';
           var moreHTML = '';
           if (def.deprecated == true) {
             disable = 'deprecated';
-            disableSpan = `<h5 class="text-danger h6" style="opacity:1"><i style="opacity:.6">Obsolète</i></h5>`;
+            disableSpan = `<p class="deprecated" style="opacity:1">Obsolète</p>`;
           }
           if (def.referto != null) {
-            seeHTML += `<div class="val_see">`;
             $.each(def.referto, function (i, ref) {
+              seeHTML += `<p class="val_see">Voir : `;
               var see = data.find(
                 (node) => node.databaseId === def.referto[i].databaseId
               );
-              seeHTML += `<i class="card-text val_see_value text-warning mr-3" data-value="${see.title}">Voir ${see.title}</i>`;
+              seeHTML += `&nbsp;&nbsp;<i class="card-text val_see_value text-warning" data-value="${see.title}">${see.title}</i>`;
+              seeHTML += `</p>`;
             });
-            seeHTML += `</div>`;
           }
           if (def.isMore == true) {
             moreHTML +=
-              '<button class="more-content btn btn-sm btn-outline-dark" data-id="' +
+              '<button class="more-content btn" data-id="' +
               node.databaseId +
               defCount +
               '"><span class="small">Plus  d\'info...</span></button>';
           }
-          if (defCount > 1) {
-            cardHTML += `<hr />`;
-          }
           var fullname = '';
           if (def.fullname) {
-            fullname = def.fullname;
+            fullname = `<h2>${def.fullname}</h2>`;
           }
           var definition = '<i>aucune définition</i>';
           if (def.definition) {
             definition = def.definition;
           }
-          cardHTML += `<div class="mt-2 ${disable}">${disableSpan}<h5 class="h6 ard-text val_fullname text-dark font-weight-bold">${defCountHTML}${fullname} <span class="card-subtitle val_type small font-weight-light text-secondary"> —&nbsp;${def.type}</span></h5><p class="card-text val_desc text-secondary">${definition} ${seeHTML}</p>${moreHTML}<div class="more"><a href="#" class="card-link">Card link</a><a href="#" class="card-link">Another link</a></div></div>`;
+          cardHTML += `<div class="def">${defCountHTML}<div class="def-content ${disable}">${disableSpan}${fullname}${definition} ${seeHTML}${moreHTML}</div></div>`;
           defCount++;
         });
-        cardHTML += `</div></div>`;
+        cardHTML += `</div>`;
         $('#result').append(cardHTML);
       }
     });
@@ -126,7 +124,7 @@ function showResult() {
         currentId
       ];
       moreHTMLContent =
-        '<div class="back-btn btn btn-sm btn-primary mb-3 small" style="cursor:pointer" onnclik="resetContainerClass()">< retour</div><div>' +
+        '<div class="back-btn btn btn-sm btn-primary mb-3 small" style="cursor:pointer; position:sticky; top:-20px" onnclik="resetContainerClass()">< retour</div><div>' +
         obj.moreContent +
         '</div>';
       $('#more-container').removeClass('right');
@@ -148,20 +146,30 @@ function showResult() {
   $(window).scroll(function (event) {
     var st = $(this).scrollTop();
     if (st > lastScrollTop) {
+      // scroll down
       $('#search').blur();
+      $('body').addClass('scroll-down');
       // $('#search').addClass('form-control-sm');
       // $('#reset').addClass('btn-scroll btn-sm');
     } else {
-      $('#search').blur();
+      // scroll up
+      $('body').removeClass('scroll-down');
+      // $('#search').blur();
       // $('#search').removeClass('form-control-sm');
       // $('#reset').removeClass('btn-scroll btn-sm');
     }
     lastScrollTop = st;
+  });
+  $('#search').click(function(){
+      $('body').removeClass('scroll-down');
   });
   searchField.on('keydown', function () {
     clearTimeout(typingTimer);
   });
   function doneTyping() {
     $('#search').blur();
+    if($('#search').val() != ''){
+      $('body').addClass('scroll-down');
+    }
   }
 }

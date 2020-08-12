@@ -6,104 +6,78 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale = 1.0, user-scalable = no"
     />
-    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <title>PRO BTP Dico</title>
     <link rel="manifest" href="manifest.webmanifest" />
     <script
       crossorigin="anonymous"
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"
     ></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/critical.css" />
+    <!-- <script src="js/bootstrap/bootstrap.min.js"></script> -->
+    <link rel="stylesheet" href="css/critical-sass.css" />
   </head>
-  <body class="bg-light" id="body">
+  <body id="body">
+      <div id="header">
+        <div id="offline-alert" class="small"></div>
+        <form>
+          <input type="text" name="search" id="search" placeholder="Que cherchez-vous ?" class="form-control small"/>
+          <button type="button" class="btn" aria-label="Close" id="reset"><span aria-hidden="true">&times;</span></button>
+        </form>
+        <div id="count">
+          <span> <br /></span><br /><b
+            >Commencez à taper votre recherche dans le champ ci-dessus pour
+            parcourir le Larouse PRO BTP !</b
+          ><br />Pour toute demande d’évolution ou d’ajout de notion,
+          cliquez sur le bouton “contact” en bas à droite.
+        </div>
+      </div>
 
-
-
-
+    <div class="focus" id="result-container">
+      <div id="result"></div>
+    </div>
+    <div id="more-container" style="top: 90px; height: 100vh; overflow-y: scroll; overflow-x: hidden;">
+      <div class="col-12 bg-white right" style="overflow-x: hidden;"></div>
+    </div>
 
 
 
     
-    <div class="sticky-top bg-light" id="header-container">
-  <div class="container pt-1 pb-1 bg-light" id="header" style="z-index:3000">
-    <div id="offline-alert" class="bg-danger text-white small text-center px-2 fixed-top">
-      Hors connexion.
-    </div>
-    <div class="row d-flex">
-      <div class="col-12 text-center py-3">
-        <form>
-          <div class="row d-flex g-0">
-            <div class="col-10 col-md-11 text-dark pr-0">
-              <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Que cherchez-vous ?"
-              class="form-control small"
-              style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
-            />
-            </div>
-            <div class="col-2 col-md-1 pl-0">
-              <button type="button" class="btn btn-dark btn-block text-center px-0" aria-label="Close" id="reset" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          </div>
-        </form>
-        <div id="count">
-          <span class="mt-5 pt-2"> <br /></span><br /><b
-            >Commencez à taper votre recherche dans le champ ci-dessus pour
-            parcourir le Larouse PRO BTP !</b
-          ><br />Pour toute demande d’évolution ou d’ajout de notion, cliquez
-          sur le bouton “contact” en bas à droite.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-    <div class="container mb-5 focus" id="result-container">
-      <div class="row d-flex mt-5">
-        <div class="col-12">
-          <div id="result" class="col-12 px-0"></div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid position-absolute" style="top: 12vh;">
-      <div class="container rounded">
-        <div class="row">
-          <div class="col-12 bg-white right" id="more-container" style="overflow-x: hidden;"></div>
-        </div>
-      </div>
-    </div>
     <!-- Install Modal -->
-    <div class="modal fade" id="installPromptModal" tabindex="-1" role="dialog" aria-labelledby="installPromptModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h3>Installez l'application</h3>
-            <p>Pour accédez à toutes les infos PRO BTP dans toutes les conditions, installez l'application PRO BTP Dico !</p>
-            <div class="d-flex justify-content-between mt-5">
-              <button type="button" class="btn btn-outline-secondary mr-auto" data-dismiss="modal">Fermer</button>
-              <button class="btn btn-primary ml-auto text-center" id="install-btn">Istaller l'app</button>
-            </div>
-          </div>
+    <div
+      class="modal"
+      id="installPromptModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="installPromptModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-body">
+        <h3>Installez l'application</h3>
+        <p>
+          Pour accédez à toutes les infos PRO BTP dans toutes les
+          conditions, installez l'application PRO BTP Dico !
+        </p>
+        <div class="action">
+          <button
+            type="button"
+            class="btn btn-close"
+            data-dismiss="modal"
+          >
+            Fermer
+          </button>
+          <button
+            class="btn btn-accept"
+            id="install-btn"
+          >
+            Installer l'app
+          </button>
         </div>
       </div>
-    </div>
-    <div class="fixed-bottom">
-      <!-- <button class="btn btn-primary btn-block text-center" id="install-btn">Istaller l'app</button> -->
     </div>
   </body>
-  <link rel="stylesheet" href="css/styles.css"/>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
 
   <html>
-    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/search.min.js"></script>
     <script type="text/javascript" src="js/getdata-dev.js"></script>
     <script type="module" src="js/app.js"></script>
     <script>
