@@ -1,4 +1,0 @@
-# a path:
-/larousse/data.json
-  # headers for that path:
-  Access-Control-Allow-Origin: *
