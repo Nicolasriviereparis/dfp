@@ -29,8 +29,8 @@ precacheAndRoute([
   { url: 'index.html', revision: null },
   { url: 'css/critical-sass.css', revision: null },
   { url: 'app.js', revision: null },
-  { url: 'getdata-dev.js', revision: null },
-  { url: 'search.min.js', revision: null },
+  // { url: 'getdata-dev.js', revision: null },
+  { url: 'search.js', revision: null },
   { url: 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js', revision: null },
 ]);
 
