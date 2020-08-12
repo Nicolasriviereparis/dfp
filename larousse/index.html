@@ -84,6 +84,11 @@
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js', {scope: './'});
       }
+      var matches = window.matchMedia('(display-mode: standalone)').matches;
+      console.log(matches);
+      if(matches == true){
+        $('#installPromptModal').addClass('hidden');
+      }
     </script>
   </html>
 </html>
