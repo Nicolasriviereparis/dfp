@@ -146,29 +146,22 @@ function showResult() {
   $(window).scroll(function (event) {
     var st = $(this).scrollTop();
     if (st > lastScrollTop) {
-      // scroll down
       $('#search').blur();
       $('body').addClass('scroll-down');
-      // $('#search').addClass('form-control-sm');
-      // $('#reset').addClass('btn-scroll btn-sm');
     } else {
-      // scroll up
       $('body').removeClass('scroll-down');
-      // $('#search').blur();
-      // $('#search').removeClass('form-control-sm');
-      // $('#reset').removeClass('btn-scroll btn-sm');
     }
     lastScrollTop = st;
   });
-  $('#search').click(function(){
-      $('body').removeClass('scroll-down');
+  $('#search').click(function () {
+    $('body').removeClass('scroll-down');
   });
   searchField.on('keydown', function () {
     clearTimeout(typingTimer);
   });
   function doneTyping() {
     $('#search').blur();
-    if($('#search').val() != ''){
+    if ($('#search').val() != '') {
       $('body').addClass('scroll-down');
     }
   }

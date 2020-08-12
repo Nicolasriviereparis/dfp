@@ -78,16 +78,10 @@
 
   <html>
     <script type="text/javascript" src="search.min.js"></script>
-    <!-- <script type="text/javascript" src="getdata-dev.js"></script> -->
     <script type="module" src="app.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js', {scope: './'});
-      }
-      var matches = window.matchMedia('(display-mode: standalone)').matches;
-      console.log(matches);
-      if(matches == true){
-        $('#installPromptModal').addClass('hidden');
       }
     </script>
   </html>
