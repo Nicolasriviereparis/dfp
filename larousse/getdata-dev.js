@@ -33,7 +33,6 @@ posts(first: 99999) {
 fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },body: JSON.stringify(WPQL_QUERY), })
   .then((res) => res.json())
   .then((json) => {
-    // console.log(json);
     /* comment this fllowinng part for pré-prod */
     // json = json.data.posts.edges.map(function (e) {
     //   return e.node;
@@ -49,6 +48,7 @@ fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },bod
         }
         return 0;
       });
+      // console.log(json);
     JSON.stringify(json);
     return json;
   })
