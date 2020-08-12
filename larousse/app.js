@@ -42,8 +42,8 @@ buttonInstall.addEventListener('click', (e) => {
   // hideMyInstallPromotion();
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then((choiceResult) => {
-    if (choiceResult.outcome === 'accepted') {
-    } else {
-    }
+    // if (choiceResult.outcome === 'accepted') {
+    // } else {
+    // }
   });
 });
