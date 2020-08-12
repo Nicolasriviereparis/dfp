@@ -1,6 +1,4 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    Access-Control-Allow-Origin = "*"
+# a path:
+/larousse/data.json
+  # headers for that path:
+  Access-Control-Allow-Origin: *
