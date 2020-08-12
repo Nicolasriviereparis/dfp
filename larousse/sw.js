@@ -11,6 +11,7 @@ const { registerRoute } = workbox.routing;
 // const {NetworkFirst} = workbox.strategies;
 const { CacheFirst } = workbox.strategies;
 const { NetworkOnly } = workbox.strategies;
+const { StaleWhileRevalidate } = workbox.strategies;
 // const {CacheOnly} = workbox.strategies;
 const { CacheableResponse } = workbox.cacheableResponse;
 const { precacheAndRoute } = workbox.precaching;
@@ -40,7 +41,7 @@ const manifestHandler = new CacheFirst();
 const docHandler = new CacheFirst();
 const cssHandler = new CacheFirst();
 const jsHandler = new CacheFirst();
-const jsonHandler = new CacheFirst();
+const jsonHandler = new StaleWhileRevalidate();
 
 registerRoute(new RegExp('.+\\.webmanifest'), manifestHandler);
 
