@@ -38,9 +38,10 @@ document.querySelector('.btn-close').addEventListener('click', () =>{
 document.querySelector('#installPromptModal').addEventListener('click', () =>{
   $('#installPromptModal').addClass('hidden');
 });
-if (window.matchMedia('(display-mode: standalone)').matches) {  
+
+window.matchMedia('(display-mode: standalone)').matches {  
   $('#installPromptModal').addClass('hidden');
-}  
+};
 
 let buttonInstall = document.querySelector('#install-btn');
 
