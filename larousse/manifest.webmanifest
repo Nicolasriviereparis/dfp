@@ -1,27 +1,22 @@
 {
-    "short_name": "PB Dico",
-    "name": "PRO BTP Dictionnaire",
-    "theme_color": "#000000",
-    "background_color": "#000000",
+    "short_name": "Le dico",
+    "name": "Le dico PRO BTP",
+    "theme_color": "#f5faff",
+    "background_color": "#f5faff",
     "display": "fullscreen",
     "Scope": "./",
     "orientation": "portrait",
     "icons": [
       {
-        "src": "icon/icon-48.png",
-        "type": "image/png",
-        "sizes": "48x48"
+          "src": "icon/android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
       },
       {
-        "src": "icon/icon-96.png",
-        "type": "image/png",
-        "sizes": "96x96"
-      },
-      {
-        "src": "icon/icon-192.png",
-        "type": "image/png",
-        "sizes": "192x192"
+          "src": "icon/android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
       }
-    ],
+  ],
     "start_url": "index.html"
   }
