@@ -30,7 +30,11 @@ posts(first: 99999) {
 }
 `,
 };
-fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },body: JSON.stringify(WPQL_QUERY), })
+fetch(url, {
+  // method: 'POST',
+  // headers: { 'Content-Type': 'application/json' },
+  // body: JSON.stringify(WPQL_QUERY),
+})
   .then((res) => res.json())
   .then((json) => {
     /* comment this fllowinng part for pré-prod */
@@ -38,17 +42,17 @@ fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },bod
     //   return e.node;
     // });
     json.sort(function (a, b) {
-        var x = a.title.toLowerCase();
-        var y = b.title.toLowerCase();
-        if (x < y) {
-          return -1;
-        }
-        if (x > y) {
-          return 1;
-        }
-        return 0;
-      });
-      // console.log(json);
+      var x = a.title.toLowerCase();
+      var y = b.title.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+    // console.log(json);
     JSON.stringify(json);
     return json;
   })
