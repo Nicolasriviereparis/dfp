@@ -27,13 +27,10 @@ setCacheNameDetails({
 precacheAndRoute([
   { url: 'manifest.webmanifest', revision: null },
   { url: 'index.html', revision: null },
-  { url: 'css/bootstrap/bootstrap.min.css', revision: null },
-  { url: 'css/critical.css', revision: null },
-  { url: 'js/bootstrap/bootstrap.min.js', revision: null },
-  { url: 'js/app.js', revision: null },
-  { url: 'js/getdata-dev.js', revision: null },
-  { url: 'js/search.js', revision: null },
-  { url: 'sw-registration.js', revision: null },
+  { url: 'css/critical-sass.css', revision: null },
+  { url: 'app.js', revision: null },
+  { url: 'getdata-dev.js', revision: null },
+  { url: 'search.min.js', revision: null },
   { url: 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js', revision: null },
 ]);
 
