@@ -1,14 +1,10 @@
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js'
-);
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-workbox.setConfig({
-  debug: false,
-});
+workbox.setConfig({debug: false,});
 
 const { registerRoute } = workbox.routing;
 // const {StaleWhileRevalidate} = workbox.strategies;
-// const {NetworkFirst} = workbox.strategies;
+const { NetworkFirst } = workbox.strategies;
 const { CacheFirst } = workbox.strategies;
 const { NetworkOnly } = workbox.strategies;
 const { StaleWhileRevalidate } = workbox.strategies;
@@ -28,19 +24,24 @@ setCacheNameDetails({
 precacheAndRoute([
   { url: 'manifest.webmanifest', revision: null },
   { url: 'index.html', revision: null },
-  { url: 'css/critical-sass.css', revision: null },
-  { url: 'app.js', revision: null },
-  // { url: 'getdata-dev.js', revision: null },
-  { url: 'search.js', revision: null },
+  // { url: 'css/style.css', revision: null },
+
+  { url: 'i/apple-touch-icon.png', revision:null},
+  { url: 'i/favicon-32x32.png', revision:null},
+  { url: 'i/favicon-16x16.png', revision:null},
+  { url: 'i/safari-pinned-tab.svg', revision:null},
+
+  { url: 'j/app.js', revision: null },
+  { url: 'j/search.js', revision: null },
   { url: 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js', revision: null },
 ]);
 
 
 
 const manifestHandler = new CacheFirst();
-const docHandler = new CacheFirst();
-const cssHandler = new CacheFirst();
-const jsHandler = new CacheFirst();
+const docHandler = new StaleWhileRevalidate();
+const cssHandler = new NetworkFirst();
+const jsHandler = new NetworkFirst();
 const jsonHandler = new StaleWhileRevalidate();
 
 registerRoute(new RegExp('.+\\.webmanifest'), manifestHandler);
@@ -53,11 +54,11 @@ registerRoute(new RegExp('.+\\.js$'), jsHandler);
 
 registerRoute(new RegExp('.+\\.json$'), jsonHandler);
 
-// handling json fetch event
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      return response || fetch(event.request);
-    })
-  );
-});
+// handling json fetch event -> serve from cache or get network
+// self.addEventListener('fetch', function (event) {
+//   event.respondWith(
+//     caches.match(event.request).then(function (response) {
+//       return response || fetch(event.request);
+//     })
+//   );
+// });

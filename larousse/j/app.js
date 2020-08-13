@@ -6,12 +6,11 @@ function changeHandler(e) {
     body.classList.add('bad-network');
     body.classList.remove('offline');
     alert.innerHTML = 'Mauvaise connexion...';
-
   } else if (speed < 0.1) {
     body.classList.remove('bad-network');
     body.classList.add('offline');
     alert.innerHTML = 'Hors connexion.';
-  }else{
+  } else{
     body.classList.remove('bad-network');
     body.classList.remove('offline');
     alert.innerHTML = '';
@@ -28,6 +27,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
   if(deferredPrompt != null){
+    console.log(deferredPrompt);
     $('#installPromptModal').removeClass('hidden');
     document.querySelector('.btn-close').addEventListener('click', () =>{
       $('#installPromptModal').addClass('hidden');
