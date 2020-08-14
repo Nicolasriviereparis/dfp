@@ -67,7 +67,7 @@ var doneTypingInterval = 3000;
 var moreContainer = document.querySelector('#more');
 const searchField = $('#search');
 
-$("#search-form").submit(function(e) {
+$("#search").submit(function(e) {
   e.preventDefault();
   showResult();
 });
