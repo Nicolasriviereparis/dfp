@@ -25,6 +25,7 @@ precacheAndRoute([
   { url: 'manifest.webmanifest', revision: null },
   { url: 'index.html', revision: null },
   // { url: 'css/style.css', revision: null },
+
   { url: 'i/apple-touch-icon.png', revision:null},
   { url: 'i/favicon-32x32.png', revision:null},
   { url: 'i/favicon-16x16.png', revision:null},
@@ -38,7 +39,7 @@ precacheAndRoute([
 
 
 const manifestHandler = new CacheFirst();
-const docHandler = new StaleWhileRevalidate();
+const docHandler = new NetworkFirst();
 const cssHandler = new NetworkFirst();
 const jsHandler = new NetworkFirst();
 const jsonHandler = new StaleWhileRevalidate();

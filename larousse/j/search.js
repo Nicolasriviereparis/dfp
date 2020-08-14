@@ -60,7 +60,7 @@ fetch(url)
 
   var introTimer = setTimeout(function(){
     $("#intro").addClass('intro-hidden');
-  }, 1200);
+  }, 750);
 
 var typingTimer;
 var doneTypingInterval = 3000;
@@ -224,14 +224,19 @@ function showResult() {
   });
 
 
-  var lastScrollTop = 0;
+  var lastScrollTop = 0;  
   $(window).scroll(function (event) {
+    var resultHeight = document.querySelector('#result').offsetHeight;
     var st = $(this).scrollTop();
-    if (st > lastScrollTop && st > 0) {
+
+    console.log(resultHeight - st);
+    if (st > lastScrollTop && st > 0 && resultHeight - st >= 100) {
       // scroll down and not at the top
       $('#search').blur();
       $('body').addClass('scroll-down');
-    } else {
+    }else if(resultHeight - st < 100){
+      // do nothing
+    }else{
       $('body').removeClass('scroll-down');
     }
     lastScrollTop = st;
