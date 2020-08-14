@@ -58,14 +58,19 @@ fetch(url)
   .catch((err) => console.log('Une erreur' + err));
 
 
-  var introTimer = setTimeout(function(){
-    $("#intro").addClass('intro-hidden');
-  }, 1200);
+var introTimer = setTimeout(function(){
+  $("#intro").addClass('intro-hidden');
+}, 1200);
 
 var typingTimer;
 var doneTypingInterval = 3000;
 var moreContainer = document.querySelector('#more');
 const searchField = $('#search');
+
+$("#search-form").submit(function(e) {
+  e.preventDefault();
+  showResult();
+});
 
 function showResult() {
   searchField.keyup(mainSearch);
@@ -90,10 +95,6 @@ function showResult() {
   }
 
   function mainSearch() {
-
-    $("#search-form").submit(function(e) {
-      e.preventDefault();
-    });
 
     $(document).scrollTop(0);
     resetContainerClass();
