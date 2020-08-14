@@ -60,7 +60,7 @@ fetch(url)
 
   var introTimer = setTimeout(function(){
     $("#intro").addClass('intro-hidden');
-  }, 750);
+  }, 1200);
 
 var typingTimer;
 var doneTypingInterval = 3000;
@@ -90,6 +90,11 @@ function showResult() {
   }
 
   function mainSearch() {
+
+    $("#search-form").submit(function(e) {
+      e.preventDefault();
+    });
+
     $(document).scrollTop(0);
     resetContainerClass();
     clearTimeout(typingTimer);
