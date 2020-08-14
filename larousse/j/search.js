@@ -69,6 +69,7 @@ const searchField = $('#search');
 
 $("#search").submit(function(e) {
   e.preventDefault();
+  doneTyping();
   showResult();
 });
 
