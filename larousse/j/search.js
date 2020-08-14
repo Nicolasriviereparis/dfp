@@ -60,7 +60,7 @@ fetch(url)
 
   var introTimer = setTimeout(function(){
     $("#intro").addClass('intro-hidden');
-  }, 750);
+  }, 1200);
 
 var typingTimer;
 var doneTypingInterval = 3000;

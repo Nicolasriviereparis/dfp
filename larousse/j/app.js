@@ -16,7 +16,7 @@ function changeHandler(e) {
     alert.innerHTML = '';
   }
 }
-navigator.connection.onchange = changeHandler; 
+navigator.connection.onchange = changeHandler;
 
 
 // Prompt install PWA
