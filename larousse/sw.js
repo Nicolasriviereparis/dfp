@@ -14,7 +14,7 @@ const { precacheAndRoute } = workbox.precaching;
 const { setCacheNameDetails } = workbox.core;
 
 setCacheNameDetails({
-  prefix: 'pbDico',
+  prefix: 'PROBTP-dicodoc',
   suffix: 'v1',
   precache: 'precache',
   runtime: 'app',
@@ -30,6 +30,7 @@ precacheAndRoute([
   { url: 'i/favicon-32x32.png', revision:null},
   { url: 'i/favicon-16x16.png', revision:null},
   { url: 'i/safari-pinned-tab.svg', revision:null},
+  { url: 'data.json', revision:null},
 
   { url: 'j/app.js', revision: null },
   { url: 'j/search.js', revision: null },

@@ -50,7 +50,7 @@ fetch(url)
         return 0;
       });
     JSON.stringify(json);
-    console.log(json);
+    // console.log(json);
     return json;
   })
   .then((json) => (data = json))
@@ -69,7 +69,7 @@ const searchField = $('#search');
 
 $("#search").submit(function(e) {
   e.preventDefault();
-  doneTyping();
+  $('#search').blur();
   showResult();
 });
 
@@ -235,8 +235,6 @@ function showResult() {
   $(window).scroll(function (event) {
     var resultHeight = document.querySelector('#result').offsetHeight;
     var st = $(this).scrollTop();
-
-    console.log(resultHeight - st);
     if (st > lastScrollTop && st > 0 && resultHeight - st >= 100) {
       // scroll down and not at the top
       $('#search').blur();
@@ -249,16 +247,13 @@ function showResult() {
     lastScrollTop = st;
   });
 
-
   $('#search').click(function(){
       $('body').removeClass('scroll-down');
   });
 
-
   searchField.on('keydown', function () {
     clearTimeout(typingTimer);
   });
-
 
   function doneTyping() {
     $('#search').blur();
