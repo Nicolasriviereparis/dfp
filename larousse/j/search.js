@@ -1,18 +1,21 @@
+/////////////////////////////////////////////////////////
+// Get Data
+
 var url = 'data.json';
 var devurl = 'http://localhost/PROBTP-Larousse/graphql';
 // url = devurl;
 const WPQL_QUERY = {
   query: `{
-posts(first: 99999) {
-  edges {
-    node {
-      databaseId
-      title
-      slug
+  posts(first: 99999) {
+    edges {
+      node {
+        title
+        databaseId
+        slug
         defs {
           items {
             deprecated
-              referto {
+            referto {
               ... on Post {
                 databaseId
               }
@@ -22,12 +25,17 @@ posts(first: 99999) {
             definition
             isMore
             moreContent
+            keywords {
+              name
+            }
           }
         }
       }
     }
   }
 }
+
+
 `,
 };
 fetch(url)
@@ -57,11 +65,13 @@ fetch(url)
   .then(() => showResult(data))
   .catch((err) => console.log('Une erreur' + err));
 
+  /////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////
+  // Search Data
 
 var introTimer = setTimeout(function(){
   $("#intro").addClass('intro-hidden');
 }, 1200);
-
 var typingTimer;
 var doneTypingInterval = 3000;
 var moreContainer = document.querySelector('#more');
@@ -102,9 +112,21 @@ function showResult() {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
     $('#result').html('');
+
     const expression = new RegExp(searchField.val(), 'i');
+    var expressionArray = '';
+    // console.log(data);
     $.each(data, function (key, node) {
-      if (searchField.val() != '' && node.title.search(expression) != -1) {
+      $.each(node.defs.items, function (i, def) {
+        expressionArray = node.title + ', ' + def.fullname;
+        if(def.keywords != null){
+          $.each(def.keywords, function (i, key) {
+            expressionArray =  expressionArray + ', ' + key.name;
+          });
+        }
+      });
+
+      if (searchField.val() != '' && expressionArray.search(expression) != -1) {
         var defTotalCount = 0;
         $.each(node.defs.items, function (i, def) {
           defTotalCount++;
@@ -121,6 +143,7 @@ function showResult() {
           var disableSpan = '';
           var seeHTML = '';
           var moreHTML = '';
+          var defFullname = '';
           if (def.deprecated == true) {
             disable = 'deprecated';
             disableSpan = `<p class="deprecated" style="opacity:1">Obsolète</p>`;
@@ -142,7 +165,6 @@ function showResult() {
               defCount +
               '"><span class="small">Plus  d\'info...</span></button>';
           }
-          var defFullname = '';
           if (def.fullname) {
             defFullname = `${def.fullname}`;
           }

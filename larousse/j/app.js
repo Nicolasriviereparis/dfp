@@ -27,7 +27,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   // Stash the event so it can be triggered later.
   deferredPrompt = e;
   if(deferredPrompt != null){
-    console.log(deferredPrompt);
+    // console.log(deferredPrompt);
     $('#installPromptModal').removeClass('hidden');
     document.querySelector('.btn-close').addEventListener('click', () =>{
       $('#installPromptModal').addClass('hidden');
