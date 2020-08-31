@@ -40,10 +40,10 @@ precacheAndRoute([
 
 
 const manifestHandler = new CacheFirst();
-const docHandler = new NetworkFirst();
-const cssHandler = new NetworkFirst();
-const jsHandler = new NetworkFirst();
-const jsonHandler = new StaleWhileRevalidate();
+const docHandler = new StaleWhileRevalidate();
+const cssHandler = new StaleWhileRevalidate();
+const jsHandler = new NetworkOnly();
+const jsonHandler = new NetworkOnly();
 
 registerRoute(new RegExp('.+\\.webmanifest'), manifestHandler);
 
